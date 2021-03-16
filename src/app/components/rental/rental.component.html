@@ -2,17 +2,13 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Araç Id</th>
-            <th>Müşteri Id</th>
-            <th>Kiralama Tarihi</th>
-            <th>Teslim Tarihi</th>
+            <th>Şirket Adı</th>
+            <th>Müşteri</th>
         </tr>
     </thead>
-    <tr *ngFor="let rentals of rentals">
-        <td>{{rentals.id}}</td>
-        <td>{{rentals.carId}}</td>
-        <td>{{rentals.customerId}}</td>
-        <td>{{rentals.rentDate}}</td>
-        <td>{{rentals.returnDate}}</td>
+    <tr *ngFor="let rentalDto of rentalDtos">
+        <td>{{rentalDto.id}}</td>
+        <td>{{rentalDto.companyName}}</td>
+        <td>{{rentalDto.firstName}</td>
     </tr>
 </table>

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Car } from 'src/app/models/car';
+import { ActivatedRoute } from '@angular/router';
 import { CarDto } from 'src/app/models/carDto';
 import { CarDtoService } from 'src/app/services/car-dto.service';
-import { CarService } from 'src/app/services/car.service';
 
 @Component({
   selector: 'app-car',
@@ -12,14 +11,31 @@ import { CarService } from 'src/app/services/car.service';
 export class CarComponent implements OnInit {
 
   cardtos:CarDto[] = [];
+  dataLoaded = false;
 
-  constructor(private carDtoService:CarDtoService) { }
+  constructor(private carDtoService:CarDtoService, private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getCarDtos();
   }
 
   getCarDtos(){
-    this.carDtoService.getCarDtos().subscribe(response=>{this.cardtos=response.data});
+    this.carDtoService.getCarDtos().subscribe(response=>{
+      this.cardtos=response.data;
+      this.dataLoaded=true;
+    });
+  }
+
+  getCarsByBrand(id:number){
+    this.carDtoService.getCarsByBrand(id).subscribe(response=>{
+      this.cardtos=response.data
+      this.dataLoaded=true;
+    })
+  }
+  getCarsByColor(id:number){
+    this.carDtoService.getCarsByColor(id).subscribe(response=>{
+      this.cardtos=response.data
+      this.dataLoaded=true;
+    })
   }
 }
